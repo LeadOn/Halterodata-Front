@@ -8,4 +8,9 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: "https://gameon-api.valentinvirot.fr",
+    },
+  },
 });
