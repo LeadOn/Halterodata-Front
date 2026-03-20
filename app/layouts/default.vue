@@ -1,3 +1,29 @@
+<script setup lang="ts">
+const isDark = ref(false);
+
+onMounted(() => {
+  const stored = localStorage.getItem("gameon-dark-theme");
+  if (
+    stored === "dark" ||
+    (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
+    isDark.value = true;
+    document.documentElement.classList.add("dark");
+  }
+});
+
+function toggleDark() {
+  isDark.value = !isDark.value;
+  if (isDark.value) {
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("gameon-dark-theme", "dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+    localStorage.setItem("gameon-dark-theme", "light");
+  }
+}
+</script>
+
 <template>
   <div
     class="bg-bgLightDarker dark:bg-bgDarkDarker min-h-screen overflow-x-hidden">
@@ -14,16 +40,33 @@
         >
 
         <div class="flex items-center justify-center space-x-4">
-          <button type="button" class="cursor-pointer">
-            <!-- @if (darkMode()) {
-            <fa-icon
-              [icon]="lightIcon"
-              class="text-customYellow text-lg"></fa-icon>
-            } @if (!darkMode()) {
-            <fa-icon
-              [icon]="darkIcon"
-              class="text-frenchBlue text-lg"></fa-icon>
-            } -->TOGGLEBTN
+          <button type="button" class="cursor-pointer" @click="toggleDark">
+            <svg
+              v-if="isDark"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6 text-customYellow">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+            </svg>
+            <svg
+              v-else
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6 text-frenchBlue">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
           </button>
         </div>
       </header>
@@ -51,57 +94,63 @@
           class="flex h-full w-full grow basis-1 items-center justify-around align-middle">
           <div
             class="group inline-flex cursor-pointer flex-col items-center justify-center rounded-s-full">
-            <!-- <fa-icon
-              [icon]="homeIcon"
-              class="text-primary dark:text-primaryDark text-lg"></fa-icon> -->HOMEICON
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6 text-primary dark:text-primaryDark">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
           </div>
 
           <div
             class="group inline-flex cursor-pointer flex-col items-center justify-center rounded-s-full">
-            <!-- <fa-icon
-              [icon]="ballIcon"
-              class="text-primary dark:text-primaryDark text-lg"></fa-icon> -->
+            <img src="/img/svg/fifagame.svg" class="h-6 w-6" alt="Football" />
           </div>
 
           <div
             class="group inline-flex cursor-pointer flex-col items-center justify-center rounded-s-full">
-            <!-- <img src="assets/img/svg/lol.svg" class="w-10 min-w-10" /> -->LoL
-            ICON
+            <img
+              src="/img/svg/lol.svg"
+              class="w-10 min-w-10"
+              alt="League of Legends" />
           </div>
 
           <div
             class="group inline-flex cursor-pointer flex-col items-center justify-center rounded-s-full">
-            <button type="button" class="cursor-pointer">
-              <!-- <fa-icon
-                [icon]="trophyIcon"
-                class="text-primary dark:text-primaryDark text-lg"></fa-icon> -->
-
-              TROPHY ICON
-            </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6 text-primary dark:text-primaryDark">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+            </svg>
           </div>
 
           <div
             class="group inline-flex cursor-pointer flex-col items-center justify-center rounded-s-full">
-            <!-- @if (isLoggedIn == true) {
-            <button
-              routerLink="/player/me"
-              type="button"
-              class="group inline-flex cursor-pointer flex-col items-center justify-center rounded-e-full">
-              <fa-icon
-                [icon]="userIcon"
-                class="text-primary dark:text-primaryDark text-lg"></fa-icon>
-            </button>
-            } @if (isLoggedIn == false) {
-            <button
-              (click)="login()"
-              type="button"
-              class="group inline-flex cursor-pointer flex-col items-center justify-center rounded-e-full">
-              <fa-icon
-                [icon]="userIcon"
-                class="text-primary dark:text-primaryDark text-lg"></fa-icon>
-            </button>
-            } -->
-            LOGIN BTN
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6 text-primary dark:text-primaryDark">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
           </div>
         </div>
       </nav>

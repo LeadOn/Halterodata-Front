@@ -72,33 +72,33 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {getTest} from "~/lib/api/lolApi";
 
 const isLoading = ref(true);
 const apiData = ref(null);
 
 onMounted(async () => {
-  await loadTest();
+  // await loadTest();
 });
 
-async function loadTest() {
-  try {
-    isLoading.value = true;
+// async function loadTest() {
+//   try {
+//     isLoading.value = true;
 
-    const data = await getTest();
+//     const data = await getTest();
 
-    if (data) {
-      apiData.value = data;
-      console.log("Data received from API:", data);
-    } else {
-      console.warn("No data received from API.");
-    }
-  } catch (error) {
-    console.error("Error while loading test data:", error);
-  } finally {
-    isLoading.value = false;
-    console.log("Finished loadTest function.");
-  }
-}
+//     if (data) {
+//       apiData.value = data;
+//       console.log("Data received from API:", data);
+//     } else {
+//       console.warn("No data received from API.");
+//     }
+//   } catch (error) {
+//     console.error("Error while loading test data:", error);
+//   } finally {
+//     isLoading.value = false;
+//     console.log("Finished loadTest function.");
+//   }
+// }
 </script>
