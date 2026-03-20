@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBaseUrl: "https://gameon-api.valentinvirot.fr",
+      apiBaseUrl: "https://halterodata-api.valentinvirot.fr",
     },
   },
 });

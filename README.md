@@ -1,34 +1,23 @@
 <p align="center">
-    <img src="./images/gameon-logo.png" width="128" />
+    <img src="./public/img/halterodata-logo.webp" width="128" alt="Halterodata's Front-end logo" />
 </p>
 
-<h1 align="center">GameOn! Front-end (League of Legends)</h1>
+<h1 align="center">Halterodata's Front-end</h1>
 
-<p align="center"><img src="./images/screenshot.png" height="400" alt="GameOn's Front-end (League of Legends) logo" /></p>
+<p align="center"><img src="./images/screenshot.png" height="400" alt="Halterodata's Front-end screenshot" /></p>
 
 <hr>
 
 # Description
 
-This project is a front-end for the GameOn! Front-End, done using Nuxt.JS, and will be running live on [this site](https://gameon-lol.valentinvirot.fr/).
+This project is a front-end for the Halterodata Front-End, done using Nuxt 4, and will be running live on [this site](https://halterodata.valentinvirot.fr/).
 
-Currently, this front-end uses multiple concepts, such as :
-
-- Dependency Injection
-- Multiple layout
-- Advanced routing
-- Login with Keycloak
-- State Management (NgRx, ...)
-- Administration portal (with different layout)
-- Lazy loading
-- ...
-
-Data is directly coming from the [GameOn! API](https://gameon-api.valentinvirot.fr/swagger).
+Data is directly coming from the [Halterodata-POC API](https://halterodata-api.valentinvirot.fr/swagger).
 
 ## How to run it?
 
-Just type `npm ci` to get all dependencies, and then use `ng serve` to run it locally.
-You can also use my Dockerfile to use it (it exposes the 80 port).
+Just type `npm ci` to get all dependencies, and then use `nuxt dev` to run it locally.
+You can also use my Dockerfile to use it (it exposes the 3000 port).
 
 ## Can I use it for my own?
 
