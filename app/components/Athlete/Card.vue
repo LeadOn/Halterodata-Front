@@ -138,7 +138,8 @@
             IWF: {{ athlete.lastStats.iwf || 0 }}
           </span>
         </div>
-        <div
+        <NuxtLink
+          :to="`/athlete/${athlete.id}`"
           class="flex items-center gap-2 text-sm font-medium text-accentBlue transition-transform group-hover:translate-x-1">
           <span>Voir profil</span>
           <svg
@@ -152,7 +153,7 @@
               stroke-width="2"
               d="M9 5l7 7-7 7" />
           </svg>
-        </div>
+        </NuxtLink>
       </div>
     </div>
   </a>

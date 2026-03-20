@@ -21,10 +21,11 @@
           </div>
         </div>
         <div class="flex items-center space-x-4 sm:space-x-6">
-          <a
+          <NuxtLink
+            to="/"
             class="text-xs font-medium text-textMuted transition-colors hover:text-white sm:text-sm">
             Accueil
-          </a>
+          </NuxtLink>
         </div>
       </div>
     </nav>

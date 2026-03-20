@@ -1,21 +1,21 @@
 <template>
   <div class="mb-8">
-    <div class="mb-4 flex items-center justify-between">
-      <h2 class="text-2xl font-bold text-white sm:text-3xl">
-        Athlètes vedettes
-      </h2>
-      <span class="text-sm text-textMuted">Épinglés</span>
-    </div>
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-      <AthleteCardSkeleton
-        v-for="skeleton in pinnedAthletesSkeletons"
-        v-if="isLoadingPinnedAthletes"
-        :key="`pinned-athlete-skeleton-${skeleton}`" />
-      <AthleteCard
-        v-else
-        v-for="athlete in pinnedAthletes"
-        :key="athlete.id"
-        :athlete="athlete" />
+    <AthleteCard v-if="athlete" :athlete="athlete" />
+    <div
+      v-else
+      class="relative overflow-hidden rounded-2xl border border-cardBg/50 bg-linear-to-br from-footerBg/90 to-gradientDark/90 shadow-2xl backdrop-blur-xl">
+      <div class="relative p-8">
+        <div class="space-y-4">
+          <div class="h-10 w-1/2 animate-pulse rounded-lg bg-cardBg/30"></div>
+          <div class="h-6 w-1/3 animate-pulse rounded-lg bg-cardBg/30"></div>
+          <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div
+              v-for="i in [1, 2, 3, 4]"
+              :key="i"
+              class="h-24 animate-pulse rounded-xl bg-cardBg/30"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
           </svg>
         </div>
         <input
-          v-model="searchTerms"
+          v-model="searchTerm"
           type="text"
           @keyup.enter="loadCompetitions()"
           placeholder="Rechercher une compétition, une ligue..."
@@ -67,7 +67,7 @@
         </select>
       </div>
       <button
-        v-if="searchTerms"
+        v-if="searchTerm"
         @click="clearSearch"
         class="flex items-center gap-2 rounded-lg border border-cardBg bg-gradientDark/40 px-4 py-2 text-sm font-medium text-textMuted transition-all hover:border-textMuted/50 hover:bg-gradientDark/60">
         <svg
@@ -101,88 +101,65 @@
 
 <script setup lang="ts">
 import {getAthleteById} from "~/lib/api/athleteApi";
-import {getCompetitions} from "~/lib/api/competitionApi";
+import {getCompetitionsByAthleteId} from "~/lib/api/competitionApi";
 import type {AthleteDto} from "~/lib/types/AthleteDto";
 import type {CompetitionDto} from "~/lib/types/CompetitionDto";
 
-const pinnedAthletes = ref<AthleteDto[]>([]);
-const isLoadingPinnedAthletes = ref(true);
-const pinnedAthletesSkeletons = [1, 2];
+const route = useRoute();
 
+const athlete = ref<AthleteDto | null>(null);
 const competitions = ref<CompetitionDto[]>([]);
-const filteredCompetitions = ref<CompetitionDto[]>([]);
-const displayedCompetitions = ref<CompetitionDto[]>([]);
-const searchTerms = ref("");
 const loading = ref(false);
+const searchTerm = ref("");
 
-const currentPage = ref<number>(1);
-const pageSize = ref<number>(20);
-const totalItems = ref<number>(0);
-const totalPages = ref<number>(0);
+const currentPage = ref(1);
+const pageSize = ref(20);
+const totalItems = ref(0);
+const totalPages = ref(0);
 
 const sortField = ref<string>("date");
 const sortOrder = ref<"asc" | "desc">("desc");
 
-onMounted(async () => {
-  await Promise.all([getPinnedAthletes(), loadCompetitions()]);
+const athleteId = computed(() => {
+  const rawId = route.params.id;
+  const value = Array.isArray(rawId) ? rawId[0] : rawId;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : 0;
 });
 
-async function getPinnedAthletes() {
+onMounted(async () => {
+  await Promise.all([getAthlete(), loadCompetitions()]);
+});
+
+async function getAthlete(): Promise<void> {
+  if (!athleteId.value) return;
+
   try {
-    isLoadingPinnedAthletes.value = true;
-
-    const athletes = await Promise.all([
-      getAthleteById(4210),
-      getAthleteById(1),
-    ]);
-    const resolvedAthletes = athletes.filter(
-      (athlete): athlete is AthleteDto => athlete !== null,
-    );
-
-    if (resolvedAthletes.length === 0) {
-      console.warn("No pinned athletes received from API.");
-      return;
-    }
-
-    pinnedAthletes.value = resolvedAthletes;
-    console.log("Pinned athletes loaded:", pinnedAthletes.value);
+    athlete.value = await getAthleteById(athleteId.value);
   } catch (error) {
-    console.error("Error while loading pinned athletes:", error);
-  } finally {
-    isLoadingPinnedAthletes.value = false;
+    console.error("Error fetching athlete data:", error);
   }
 }
 
-async function changePage(page: number): Promise<void> {
-  if (page <= 0 || page > totalPages.value) return;
-
-  currentPage.value = page;
-  await loadCompetitions();
-}
-
-async function onPageSizeChange(newPageSize: number): Promise<void> {
-  pageSize.value = newPageSize;
-  currentPage.value = 1;
-  await loadCompetitions();
-}
-
-async function clearSearch(): Promise<void> {
-  searchTerms.value = "";
-  currentPage.value = 1;
-  await loadCompetitions();
-}
-
 async function loadCompetitions(): Promise<void> {
+  if (!athleteId.value) return;
+
   loading.value = true;
 
   try {
-    const data = await getCompetitions(
+    const data = await getCompetitionsByAthleteId(
+      athleteId.value,
       currentPage.value,
       pageSize.value,
-      searchTerms.value !== "" ? searchTerms.value : undefined,
+      searchTerm.value !== "" ? searchTerm.value : undefined,
     );
 
-    if (!data) return;
+    if (!data) {
+      competitions.value = [];
+      totalItems.value = 0;
+      totalPages.value = 0;
+      return;
+    }
 
     currentPage.value = data.page;
     pageSize.value = data.resultsPerPage;
@@ -250,98 +227,24 @@ function sortBy(field: string): void {
     sortField.value = field;
     sortOrder.value = "asc";
   }
-
   sortCompetitions();
 }
 
-function formatDate(date?: Date | string): string {
-  if (!date) return "N/A";
-  const d = typeof date === "string" ? new Date(date) : date;
-  return new Intl.DateTimeFormat("fr-FR", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(d);
+async function changePage(page: number): Promise<void> {
+  if (page <= 0 || page > totalPages.value) return;
+  currentPage.value = page;
+  await loadCompetitions();
 }
 
-function getStatusBadgeClass(state: number): string {
-  switch (state) {
-    case 1:
-      return "bg-green-500/20 text-green-400 border-green-500/30";
-    case 0:
-      return "bg-blue-500/20 text-blue-400 border-blue-500/30";
-    default:
-      return "bg-textMuted/20 text-textMuted border-textMuted/30";
-  }
+async function onPageSizeChange(newPageSize: number): Promise<void> {
+  pageSize.value = newPageSize;
+  currentPage.value = 1;
+  await loadCompetitions();
 }
 
-function getStatusLabel(state: number): string {
-  switch (state) {
-    case 1:
-      return "Terminée";
-    case 0:
-      return "En cours";
-    default:
-      return "Inconnu";
-  }
-}
-
-function getGenderLabel(gender: number): string {
-  switch (gender) {
-    case 0:
-      return "Masculin";
-    case 1:
-      return "Féminin";
-    case 2:
-      return "Mixte";
-    default:
-      return "N/A";
-  }
-}
-
-function getTypeLabel(type: boolean): string {
-  return type ? "En équipe" : "Individuelle";
-}
-
-function getPagesArray(): number[] {
-  return Array.from({length: totalPages.value}, (_, i) => i);
-}
-
-function getVisiblePages(): (number | "ellipsis")[] {
-  const pages: (number | "ellipsis")[] = [];
-  const total = totalPages.value;
-  const current = currentPage.value;
-
-  if (total <= 7) {
-    return Array.from({length: total}, (_, i) => i + 1);
-  }
-
-  pages.push(1);
-
-  if (current <= 3) {
-    for (let i = 2; i <= 5; i++) {
-      pages.push(i);
-    }
-    pages.push("ellipsis");
-    pages.push(total);
-  } else if (current >= total - 3) {
-    pages.push("ellipsis");
-    for (let i = total - 4; i <= total; i++) {
-      pages.push(i);
-    }
-  } else {
-    pages.push("ellipsis");
-    for (let i = current - 1; i <= current + 1; i++) {
-      pages.push(i);
-    }
-    pages.push("ellipsis");
-    pages.push(total);
-  }
-
-  return pages;
-}
-
-function getEndIndex(): number {
-  return Math.min(currentPage.value * pageSize.value, totalItems.value);
+async function clearSearch(): Promise<void> {
+  searchTerm.value = "";
+  currentPage.value = 1;
+  await loadCompetitions();
 }
 </script>
