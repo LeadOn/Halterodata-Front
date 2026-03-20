@@ -1,3 +1,4 @@
+import type {CompetitionDto} from "../types/CompetitionDto";
 import type {CompetitionSearchResultDto} from "../types/CompetitionSearchResultDto";
 
 export async function getCompetitions(
@@ -51,6 +52,29 @@ export async function getCompetitionsByAthleteId(
     console.error("Error while fetching competitions:", error);
     throw new Error(
       `Error while fetching competitions: ${error instanceof Error ? error.message : "Unknown error"}`,
+    );
+  }
+}
+
+export async function getCompetitionById(
+  competitionId: number,
+): Promise<CompetitionDto | null> {
+  try {
+    const config = useRuntimeConfig();
+    const apiBaseUrl = config.public.apiBaseUrl;
+
+    const response = await fetch(`${apiBaseUrl}/competition/${competitionId}`);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`API error thrown: (${response.status}): ${errorText}`);
+    }
+
+    return (await response.json()) as CompetitionDto;
+  } catch (error) {
+    console.error("Error while fetching competition:", error);
+    throw new Error(
+      `Error while fetching competition: ${error instanceof Error ? error.message : "Unknown error"}`,
     );
   }
 }
