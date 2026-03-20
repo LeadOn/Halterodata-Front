@@ -96,7 +96,7 @@
           </div>
           <div class="mt-3">
             <NuxtLink
-              :to="`/halterodatapoc/competition/${competition.id}`"
+              :to="`/competition/${competition.id}`"
               class="w-full rounded-lg bg-accentBlue/20 px-4 py-2 text-sm font-medium text-accentBlue transition-all hover:bg-accentBlue/30 active:scale-95">
               Voir détails
             </NuxtLink>
@@ -384,7 +384,7 @@
               </td>
               <td class="px-4 py-3 text-right sm:px-6 sm:py-4">
                 <NuxtLink
-                  :to="`/halterodatapoc/competition/${competition.id}`"
+                  :to="`/competition/${competition.id}`"
                   class="rounded-lg bg-accentBlue/20 px-3 py-1.5 text-xs font-medium text-accentBlue transition-all hover:bg-accentBlue/30 active:scale-95 sm:px-4 sm:py-2 sm:text-sm">
                   Voir détails
                 </NuxtLink>
