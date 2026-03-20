@@ -4,7 +4,7 @@
 
 <h1 align="center">Halterodata's Front-end</h1>
 
-<p align="center"><img src="./images/screenshot.png" height="400" alt="Halterodata's Front-end screenshot" /></p>
+<p align="center"><img src="./public/img/halterodata-front.png" height="400" alt="Halterodata's Front-end screenshot" /></p>
 
 <hr>
 
