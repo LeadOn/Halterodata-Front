@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="rounded-xl bg-footerBg/70 shadow-xl backdrop-blur-lg">
+  <div class="rounded-xl bg-footerBg/70 shadow-xl backdrop-blur-lg">
     <div v-if="props.loading" class="flex h-96 items-center justify-center">
       <div class="flex flex-col items-center gap-4">
         <div

@@ -3,14 +3,23 @@
   <div class="mb-8">
     <div
       class="relative overflow-hidden rounded-2xl border border-cardBg/50 bg-linear-to-br from-footerBg/90 to-gradientDark/90 shadow-2xl backdrop-blur-xl">
-      <div class="absolute inset-0 bg-linear-to-t from-gradientDark via-transparent to-transparent" />
+      <div
+        class="absolute inset-0 bg-linear-to-t from-gradientDark via-transparent to-transparent" />
       <div class="relative p-6">
         <div class="mb-4">
           <NuxtLink
             to="/"
             class="inline-flex items-center gap-1.5 text-xs font-medium text-textMuted transition-colors hover:text-white">
-            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            <svg
+              class="h-3.5 w-3.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7" />
             </svg>
             Retour aux compétitions
           </NuxtLink>
@@ -20,18 +29,33 @@
           <h2 class="text-2xl font-bold text-white sm:text-3xl">
             {{ competition?.name || "Compétition" }}
           </h2>
-          <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-textMuted">
+          <div
+            class="mt-3 flex flex-wrap items-center gap-3 text-sm text-textMuted">
             <span class="flex items-center gap-1.5">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
                   d="M8 7V3m8 4V3m-9 8h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               {{ formattedCompetitionDate }}
             </span>
             <span class="text-cardBg">•</span>
             <span class="flex items-center gap-1.5">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
                   d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
               {{ competition?.league || "—" }}
@@ -89,11 +113,19 @@
   </div>
 
   <!-- Champ de recherche -->
-  <div class="mb-6 rounded-2xl border border-cardBg/50 bg-footerBg/80 p-4 shadow-xl backdrop-blur-xl sm:p-5">
+  <div
+    class="mb-6 rounded-2xl border border-cardBg/50 bg-footerBg/80 p-4 shadow-xl backdrop-blur-xl sm:p-5">
     <div class="relative">
       <div class="absolute inset-y-0 left-0 flex items-center pl-4">
-        <svg class="h-5 w-5 text-textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        <svg
+          class="h-5 w-5 text-textMuted"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </div>
@@ -120,22 +152,37 @@
   </div>
 
   <!-- Tableau des résultats -->
-  <div class="overflow-hidden rounded-2xl border border-cardBg/50 bg-gradientDark/40 shadow-xl">
+  <div
+    class="overflow-hidden rounded-2xl border border-cardBg/50 bg-gradientDark/40 shadow-xl">
     <div v-if="loading" class="flex h-64 items-center justify-center">
       <div class="flex flex-col items-center gap-4">
-        <div class="h-10 w-10 animate-spin rounded-full border-4 border-accentBlue border-t-transparent"></div>
+        <div
+          class="h-10 w-10 animate-spin rounded-full border-4 border-accentBlue border-t-transparent"></div>
         <p class="text-sm text-textMuted">Chargement des résultats...</p>
       </div>
     </div>
 
-    <div v-else-if="displayedDetails.length === 0" class="flex h-64 items-center justify-center">
+    <div
+      v-else-if="displayedDetails.length === 0"
+      class="flex h-64 items-center justify-center">
       <div class="text-center">
-        <svg class="mx-auto h-12 w-12 text-textMuted/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        <svg
+          class="mx-auto h-12 w-12 text-textMuted/30"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-        <p class="mt-3 text-base font-medium text-white">Aucun résultat trouvé</p>
-        <p class="mt-1 text-sm text-textMuted">Essayez de modifier vos critères de recherche</p>
+        <p class="mt-3 text-base font-medium text-white">
+          Aucun résultat trouvé
+        </p>
+        <p class="mt-1 text-sm text-textMuted">
+          Essayez de modifier vos critères de recherche
+        </p>
       </div>
     </div>
 
@@ -145,49 +192,81 @@
           <thead>
             <!-- Ligne de colonnes principales -->
             <tr class="border-b border-cardBg bg-gradientDark/30">
-              <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-textMuted" rowspan="2">
+              <th
+                class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-textMuted"
+                rowspan="2">
                 Athlète
               </th>
-              <th class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider text-textMuted" rowspan="2">
+              <th
+                class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider text-textMuted"
+                rowspan="2">
                 Club
               </th>
-              <th class="px-3 py-3 text-center text-xs font-semibold uppercase tracking-wider text-textMuted" rowspan="2">
+              <th
+                class="px-3 py-3 text-center text-xs font-semibold uppercase tracking-wider text-textMuted"
+                rowspan="2">
                 Année
               </th>
-              <th class="px-3 py-3 text-center text-xs font-semibold uppercase tracking-wider text-textMuted" rowspan="2">
+              <th
+                class="px-3 py-3 text-center text-xs font-semibold uppercase tracking-wider text-textMuted"
+                rowspan="2">
                 Poids
               </th>
-              <th colspan="4" class="border-l border-cardBg/30 px-3 py-2 text-center text-xs font-semibold uppercase tracking-wider text-accentBlue/70">
+              <th
+                colspan="4"
+                class="border-l border-cardBg/30 px-3 py-2 text-center text-xs font-semibold uppercase tracking-wider text-accentBlue/70">
                 Arraché
               </th>
-              <th colspan="4" class="border-l border-cardBg/30 px-3 py-2 text-center text-xs font-semibold uppercase tracking-wider text-accentBlue/70">
+              <th
+                colspan="4"
+                class="border-l border-cardBg/30 px-3 py-2 text-center text-xs font-semibold uppercase tracking-wider text-accentBlue/70">
                 Épaulé-Jeté
               </th>
-              <th class="border-l border-cardBg/30 px-3 py-3 text-center text-xs font-semibold uppercase tracking-wider text-accentBlue" rowspan="2">
+              <th
+                class="border-l border-cardBg/30 px-3 py-3 text-center text-xs font-semibold uppercase tracking-wider text-accentBlue"
+                rowspan="2">
                 Total
               </th>
-              <th class="px-3 py-3 text-center text-xs font-semibold uppercase tracking-wider text-textMuted/60" rowspan="2">
+              <th
+                class="px-3 py-3 text-center text-xs font-semibold uppercase tracking-wider text-textMuted/60"
+                rowspan="2">
                 IWF
               </th>
             </tr>
             <!-- Sous-en-têtes tentatives -->
-            <tr class="border-b border-cardBg/30 bg-gradientDark/20 text-xs text-textMuted/50">
-              <th class="border-l border-cardBg/30 py-1.5 text-center font-normal">1</th>
+            <tr
+              class="border-b border-cardBg/30 bg-gradientDark/20 text-xs text-textMuted/50">
+              <th
+                class="border-l border-cardBg/30 py-1.5 text-center font-normal">
+                1
+              </th>
               <th class="py-1.5 text-center font-normal">2</th>
               <th class="py-1.5 text-center font-normal">3</th>
-              <th class="border-l border-cardBg/30 py-1.5 text-center font-semibold text-textMuted/70">Meilleur</th>
-              <th class="border-l border-cardBg/30 py-1.5 text-center font-normal">1</th>
+              <th
+                class="border-l border-cardBg/30 py-1.5 text-center font-semibold text-textMuted/70">
+                Meilleur
+              </th>
+              <th
+                class="border-l border-cardBg/30 py-1.5 text-center font-normal">
+                1
+              </th>
               <th class="py-1.5 text-center font-normal">2</th>
               <th class="py-1.5 text-center font-normal">3</th>
-              <th class="border-l border-cardBg/30 py-1.5 text-center font-semibold text-textMuted/70">Meilleur</th>
+              <th
+                class="border-l border-cardBg/30 py-1.5 text-center font-semibold text-textMuted/70">
+                Meilleur
+              </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-cardBg/30">
-            <template v-for="[groupKey, entries] in groupedDetails" :key="groupKey">
+            <template
+              v-for="[groupKey, entries] in groupedDetails"
+              :key="groupKey">
               <!-- Ligne de groupe catégorie -->
               <tr class="bg-cardBg/20">
                 <td colspan="14" class="px-4 py-2">
-                  <span class="text-xs font-bold uppercase tracking-wider text-accentBlue/80">
+                  <span
+                    class="text-xs font-bold uppercase tracking-wider text-accentBlue/80">
                     {{ groupKey }}
                   </span>
                 </td>
@@ -200,44 +279,92 @@
                 <td class="px-4 py-3">
                   <div class="flex flex-col">
                     <NuxtLink
-                      :to="entry.athlete?.id ? `/athlete/${entry.athlete.id}` : '#'"
+                      :to="
+                        entry.athlete?.id ? `/athlete/${entry.athlete.id}` : '#'
+                      "
                       class="text-sm font-semibold text-white transition-colors hover:text-accentBlue">
                       {{ entry.athlete?.fullName || "—" }}
                     </NuxtLink>
-                    <span class="text-xs text-textMuted/50">{{ entry.athlete?.licenceId || "" }}</span>
+                    <span class="text-xs text-textMuted/50">{{
+                      entry.athlete?.licenceId || ""
+                    }}</span>
                   </div>
                 </td>
-                <td class="px-3 py-3 text-sm text-textMuted">{{ entry.club || "—" }}</td>
-                <td class="px-3 py-3 text-center text-sm text-textMuted">{{ getYear(entry) || "—" }}</td>
-                <td class="px-3 py-3 text-center text-sm font-medium text-white">
-                  {{ entry.bodyWeight != null ? `${entry.bodyWeight} kg` : "—" }}
+                <td class="px-3 py-3 text-sm text-textMuted">
+                  {{ entry.club || "—" }}
                 </td>
-                <td :class="['border-l border-cardBg/30 px-3 py-3 text-center text-sm font-medium', getAttemptClass(entry.snatch1)]">
+                <td class="px-3 py-3 text-center text-sm text-textMuted">
+                  {{ getYear(entry) || "—" }}
+                </td>
+                <td
+                  class="px-3 py-3 text-center text-sm font-medium text-white">
+                  {{
+                    entry.bodyWeight != null ? `${entry.bodyWeight} kg` : "—"
+                  }}
+                </td>
+                <td
+                  :class="[
+                    'border-l border-cardBg/30 px-3 py-3 text-center text-sm font-medium',
+                    getAttemptClass(entry.snatch1),
+                  ]">
                   {{ getAttemptDisplay(entry.snatch1) }}
                 </td>
-                <td :class="['px-3 py-3 text-center text-sm font-medium', getAttemptClass(entry.snatch2)]">
+                <td
+                  :class="[
+                    'px-3 py-3 text-center text-sm font-medium',
+                    getAttemptClass(entry.snatch2),
+                  ]">
                   {{ getAttemptDisplay(entry.snatch2) }}
                 </td>
-                <td :class="['px-3 py-3 text-center text-sm font-medium', getAttemptClass(entry.snatch3)]">
+                <td
+                  :class="[
+                    'px-3 py-3 text-center text-sm font-medium',
+                    getAttemptClass(entry.snatch3),
+                  ]">
                   {{ getAttemptDisplay(entry.snatch3) }}
                 </td>
-                <td class="border-l border-cardBg/30 px-3 py-3 text-center text-sm font-bold text-white">
-                  {{ entry.bestSnatch != null && entry.bestSnatch > 0 ? entry.bestSnatch : "—" }}
+                <td
+                  class="border-l border-cardBg/30 px-3 py-3 text-center text-sm font-bold text-white">
+                  {{
+                    entry.bestSnatch != null && entry.bestSnatch > 0
+                      ? entry.bestSnatch
+                      : "—"
+                  }}
                 </td>
-                <td :class="['border-l border-cardBg/30 px-3 py-3 text-center text-sm font-medium', getAttemptClass(entry.cj1)]">
+                <td
+                  :class="[
+                    'border-l border-cardBg/30 px-3 py-3 text-center text-sm font-medium',
+                    getAttemptClass(entry.cj1),
+                  ]">
                   {{ getAttemptDisplay(entry.cj1) }}
                 </td>
-                <td :class="['px-3 py-3 text-center text-sm font-medium', getAttemptClass(entry.cj2)]">
+                <td
+                  :class="[
+                    'px-3 py-3 text-center text-sm font-medium',
+                    getAttemptClass(entry.cj2),
+                  ]">
                   {{ getAttemptDisplay(entry.cj2) }}
                 </td>
-                <td :class="['px-3 py-3 text-center text-sm font-medium', getAttemptClass(entry.cj3)]">
+                <td
+                  :class="[
+                    'px-3 py-3 text-center text-sm font-medium',
+                    getAttemptClass(entry.cj3),
+                  ]">
                   {{ getAttemptDisplay(entry.cj3) }}
                 </td>
-                <td class="border-l border-cardBg/30 px-3 py-3 text-center text-sm font-bold text-white">
-                  {{ entry.bestCj != null && entry.bestCj > 0 ? entry.bestCj : "—" }}
+                <td
+                  class="border-l border-cardBg/30 px-3 py-3 text-center text-sm font-bold text-white">
+                  {{
+                    entry.bestCj != null && entry.bestCj > 0
+                      ? entry.bestCj
+                      : "—"
+                  }}
                 </td>
-                <td class="border-l border-cardBg/30 px-3 py-3 text-center text-sm font-bold text-accentBlue">
-                  {{ entry.total != null && entry.total > 0 ? entry.total : "—" }}
+                <td
+                  class="border-l border-cardBg/30 px-3 py-3 text-center text-sm font-bold text-accentBlue">
+                  {{
+                    entry.total != null && entry.total > 0 ? entry.total : "—"
+                  }}
                 </td>
                 <td class="px-3 py-3 text-center text-sm text-textMuted/70">
                   {{ entry.iwf ?? "—" }}
@@ -266,8 +393,16 @@
             :disabled="currentPage <= 1"
             @click="changePage(currentPage - 1)"
             class="flex items-center gap-1.5 rounded-lg border border-accentBlue/30 bg-accentBlue/10 px-3 py-2 text-xs font-semibold text-accentBlue transition-all hover:border-accentBlue/60 hover:bg-accentBlue/20 disabled:cursor-not-allowed disabled:border-cardBg disabled:bg-transparent disabled:text-textMuted/40">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7" />
             </svg>
             Précédent
           </button>
@@ -280,8 +415,16 @@
             @click="changePage(currentPage + 1)"
             class="flex items-center gap-1.5 rounded-lg border border-accentBlue/30 bg-accentBlue/10 px-3 py-2 text-xs font-semibold text-accentBlue transition-all hover:border-accentBlue/60 hover:bg-accentBlue/20 disabled:cursor-not-allowed disabled:border-cardBg disabled:bg-transparent disabled:text-textMuted/40">
             Suivant
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>

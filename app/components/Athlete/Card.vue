@@ -3,7 +3,8 @@
     :to="`/athlete/${athlete.id}`"
     class="group relative block will-change-transform overflow-hidden rounded-2xl border border-cardBg/50 bg-linear-to-br from-footerBg/90 to-gradientDark/90 shadow-xl backdrop-blur-xl transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1.5 hover:border-accentBlue/60 hover:shadow-2xl hover:shadow-accentBlue/15">
     <!-- Lueur de survol -->
-    <div class="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-1 ring-accentBlue/40 transition-opacity duration-300 group-hover:opacity-100"></div>
+    <div
+      class="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-1 ring-accentBlue/40 transition-opacity duration-300 group-hover:opacity-100"></div>
     <div class="absolute inset-0 overflow-hidden">
       <img
         v-if="athlete.id === 4210"
@@ -141,7 +142,8 @@
             IWF: {{ athlete.lastStats.iwf || 0 }}
           </span>
         </div>
-        <div class="flex items-center gap-2 text-sm font-medium text-accentBlue transition-transform group-hover:translate-x-1">
+        <div
+          class="flex items-center gap-2 text-sm font-medium text-accentBlue transition-transform group-hover:translate-x-1">
           <span>Voir profil</span>
           <svg
             class="h-4 w-4"

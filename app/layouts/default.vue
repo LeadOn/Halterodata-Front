@@ -6,7 +6,8 @@ const route = useRoute();
   <div
     class="min-h-screen w-full overflow-x-hidden bg-linear-to-br from-gradientDark via-gradientMid to-gradientDark">
     <!-- Barre d'accent colorée en haut -->
-    <div class="h-0.5 w-full bg-linear-to-r from-accentBlue/0 via-accentBlue to-accentBlue/0"></div>
+    <div
+      class="h-0.5 w-full bg-linear-to-r from-accentBlue/0 via-accentBlue to-accentBlue/0"></div>
 
     <nav
       class="sticky top-0 z-50 w-full border-b border-cardBg/50 bg-gradientDark/95 shadow-lg backdrop-blur-md">
@@ -18,7 +19,8 @@ const route = useRoute();
             class="h-8 w-8 rounded-lg shadow-md transition-transform group-hover:scale-105 sm:h-12 sm:w-12"
             alt="Halterodata's Logo" />
           <div class="flex flex-col">
-            <span class="text-base font-bold text-white transition-colors group-hover:text-accentBlue sm:text-xl">
+            <span
+              class="text-base font-bold text-white transition-colors group-hover:text-accentBlue sm:text-xl">
               Halterodata
             </span>
             <span class="hidden text-xs text-textMuted sm:block">
