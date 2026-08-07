@@ -47,4 +47,4 @@ Avant de générer du code, vérifie :
 
 ## 6. Maintenance de ce fichier (synchronisation)
 
-Ce fichier doit rester synchronisé avec `CLAUDE.md` et `CURSOR.md` (contenu identique, adapté au format de chaque outil). **À chaque modification importante du projet (structure de dossiers, modèle de données, conventions de code, etc.), répercute le changement dans les trois fichiers avant de considérer la tâche terminée.**
+Ce fichier doit rester synchronisé avec `.github/copilot-instructions.md` et `CLAUDE.md` (contenu identique, adapté au format de chaque outil). **À chaque modification importante du projet (structure de dossiers, modèle de données, conventions de code, etc.), répercute le changement dans les trois fichiers avant de considérer la tâche terminée.**
