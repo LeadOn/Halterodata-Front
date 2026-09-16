@@ -1,80 +1,58 @@
-import type {CompetitionDto} from "../types/CompetitionDto";
-import type {CompetitionSearchResultDto} from "../types/CompetitionSearchResultDto";
+import type {
+  CompetitionDetailedDto,
+  CompetitionDto,
+} from "../types/Competition";
+import type {PaginatedResult} from "../types/PaginatedResult";
+import {
+  parseCompetition,
+  parseDetailedCompetition,
+  parsePaginatedResult,
+} from "../utils/apiParsers";
+import {apiRequest} from "./config";
 
-export async function getCompetitions(
-  page: number = 1,
-  size: number = 10,
-  keywords?: string,
-): Promise<CompetitionSearchResultDto | null> {
-  try {
-    const config = useRuntimeConfig();
-    const apiBaseUrl = config.public.apiBaseUrl;
-
-    const response = await fetch(
-      `${apiBaseUrl}/competition?page=${page}&size=${size}&keywords=${keywords ?? ""}`,
-    );
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`API error thrown: (${response.status}): ${errorText}`);
-    }
-
-    return (await response.json()) as CompetitionSearchResultDto;
-  } catch (error) {
-    console.error("Error while fetching competitions:", error);
-    throw new Error(
-      `Error while fetching competitions: ${error instanceof Error ? error.message : "Unknown error"}`,
-    );
-  }
+export interface CompetitionSearchParams {
+  page?: number;
+  size?: number;
+  keywords?: string;
 }
 
-export async function getCompetitionsByAthleteId(
+function toQuery({page = 1, size = 20, keywords}: CompetitionSearchParams) {
+  // `keywords` n'est transmis que s'il est renseigné ; l'encodage est délégué
+  // à ofetch — une concaténation manuelle casserait sur `&` et `#`.
+  const trimmed = keywords?.trim();
+  return {page, size, ...(trimmed ? {keywords: trimmed} : {})};
+}
+
+function parseCompetitionPage(value: unknown): PaginatedResult<CompetitionDto> {
+  return parsePaginatedResult(value, parseCompetition);
+}
+
+/** `GET /competition` */
+export function getCompetitions(
+  params: CompetitionSearchParams = {},
+): Promise<PaginatedResult<CompetitionDto>> {
+  return apiRequest("/competition", parseCompetitionPage, {
+    query: toQuery(params),
+  });
+}
+
+/** `GET /athlete/{athleteId}/competition` */
+export function getCompetitionsByAthleteId(
   athleteId: number,
-  page: number = 1,
-  size: number = 10,
-  keywords?: string,
-): Promise<CompetitionSearchResultDto | null> {
-  try {
-    const config = useRuntimeConfig();
-    const apiBaseUrl = config.public.apiBaseUrl;
-
-    const response = await fetch(
-      `${apiBaseUrl}/athlete/${athleteId}/competition?page=${page}&size=${size}&keywords=${keywords ?? ""}`,
-    );
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`API error thrown: (${response.status}): ${errorText}`);
-    }
-
-    return (await response.json()) as CompetitionSearchResultDto;
-  } catch (error) {
-    console.error("Error while fetching competitions:", error);
-    throw new Error(
-      `Error while fetching competitions: ${error instanceof Error ? error.message : "Unknown error"}`,
-    );
-  }
+  params: CompetitionSearchParams = {},
+): Promise<PaginatedResult<CompetitionDto>> {
+  return apiRequest(`/athlete/${athleteId}/competition`, parseCompetitionPage, {
+    query: toQuery(params),
+  });
 }
 
-export async function getCompetitionById(
+/**
+ * `GET /competition/{id}`
+ *
+ * @throws Erreur Nuxt 404 si la compétition n'existe pas.
+ */
+export function getCompetitionById(
   competitionId: number,
-): Promise<CompetitionDto | null> {
-  try {
-    const config = useRuntimeConfig();
-    const apiBaseUrl = config.public.apiBaseUrl;
-
-    const response = await fetch(`${apiBaseUrl}/competition/${competitionId}`);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`API error thrown: (${response.status}): ${errorText}`);
-    }
-
-    return (await response.json()) as CompetitionDto;
-  } catch (error) {
-    console.error("Error while fetching competition:", error);
-    throw new Error(
-      `Error while fetching competition: ${error instanceof Error ? error.message : "Unknown error"}`,
-    );
-  }
+): Promise<CompetitionDetailedDto> {
+  return apiRequest(`/competition/${competitionId}`, parseDetailedCompetition);
 }

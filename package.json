@@ -8,7 +8,16 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "nuxt typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "docs:sync": "node scripts/sync-instructions.mjs",
+    "docs:check": "node scripts/sync-instructions.mjs --check"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -16,5 +25,17 @@
     "tailwindcss": "^4.3.3",
     "vue": "^3.5.41",
     "vue-router": "^5.2.0"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.17.0",
+    "@nuxt/test-utils": "^4.3.2",
+    "@vue/test-utils": "^2.5.0",
+    "eslint": "^10.10.0",
+    "happy-dom": "^20.14.5",
+    "prettier": "^3.9.7",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.1",
+    "vue-tsc": "^3.3.11"
   }
 }

@@ -1,9 +1,10 @@
-export class StatRecapDto {
-  snatch?: number;
-  cj?: number;
-  total?: number;
-  iwf?: number;
-  bodyWeight?: number;
-  serie?: string;
-  category?: string;
+/** Récapitulatif de performances (meilleurs résultats ou derniers en date). */
+export interface StatRecapDto {
+  snatch: number | null;
+  cj: number | null;
+  total: number | null;
+  iwf: number | null;
+  bodyWeight: number | null;
+  serie: string | null;
+  category: string | null;
 }

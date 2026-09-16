@@ -1,20 +1,26 @@
-import { AthleteDto } from "./AthleteDto";
+import type {AthleteDto} from "./AthleteDto";
 
-export class CompetitionDetail {
-  club: string | null = null;
-  countryCode: string | null = null;
-  bodyWeight: number | null = null;
-  snatch1: number | null = null;
-  snatch2: number | null = null;
-  snatch3: number | null = null;
-  bestSnatch: number | null = null;
-  cj1: number | null = null;
-  cj2: number | null = null;
-  cj3: number | null = null;
-  bestCj: number | null = null;
-  total: number | null = null;
-  serie: string | null = null;
-  category: string | null = null;
-  iwf: number | null = null;
-  athlete?: AthleteDto
+/**
+ * Ligne de résultat d'un athlète sur une compétition.
+ *
+ * Les essais (`snatch1`…`cj3`) suivent la convention Scoresheet : valeur
+ * positive = essai réussi, négative = essai manqué, 0/`null` = non tenté.
+ */
+export interface CompetitionDetail {
+  club: string | null;
+  countryCode: string | null;
+  bodyWeight: number | null;
+  snatch1: number | null;
+  snatch2: number | null;
+  snatch3: number | null;
+  bestSnatch: number | null;
+  cj1: number | null;
+  cj2: number | null;
+  cj3: number | null;
+  bestCj: number | null;
+  total: number | null;
+  serie: string | null;
+  category: string | null;
+  iwf: number | null;
+  athlete: AthleteDto | null;
 }

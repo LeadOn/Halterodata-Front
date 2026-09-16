@@ -2,22 +2,27 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 html,
-body,
-#__nuxt__ {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100vw !important;
+body {
+  margin: 0;
+  padding: 0;
+  /* `100%` et non `100vw` : `100vw` inclut la barre de défilement et
+     provoque un débordement horizontal. */
+  width: 100%;
   overflow-x: hidden;
 }
 
-*,
-*::before,
-*::after {
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease,
-    fill 0.3s ease;
+/* Pas de transition globale sur `*` : chaque composant déclare la sienne
+   (`transition-colors`, `transition-all`…). */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /**
@@ -34,10 +39,12 @@ body,
 */
 @font-face {
   font-family: "Chillax-Regular";
+  /* Ordre important : le .woff2 (20 Ko) doit précéder le .ttf (62 Ko), et
+     chaque `format()` doit correspondre au fichier réellement pointé. */
   src:
-    url("/fonts/Chillax-Regular.ttf") format("woff2"),
-    url("/assets/fonts/Chillax-Regular.woff") format("woff"),
-    url("/assets/fonts/Chillax-Regular.ttf") format("truetype");
+    url("/fonts/Chillax-Regular.woff2") format("woff2"),
+    url("/fonts/Chillax-Regular.woff") format("woff"),
+    url("/fonts/Chillax-Regular.ttf") format("truetype");
   font-weight: 400;
   font-display: swap;
   font-style: normal;

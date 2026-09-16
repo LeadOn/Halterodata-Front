@@ -1,0 +1,11 @@
+.nuxt
+.output
+node_modules
+dist
+package-lock.json
+public/
+
+# Fichiers d'instruction générés (source : docs/instructions.template.md)
+CLAUDE.md
+CURSOR.md
+.github/copilot-instructions.md

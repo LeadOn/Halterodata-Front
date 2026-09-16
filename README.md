@@ -16,8 +16,39 @@ Data is directly coming from the [Halterodata-POC API](https://halterodata-api.v
 
 ## How to run it?
 
-Just type `npm ci` to get all dependencies, and then use `nuxt dev` to run it locally.
-You can also use my Dockerfile to use it (it exposes the 3000 port).
+```bash
+npm ci
+npm run dev
+```
+
+The Dockerfile is a multi-stage build and exposes port 3000:
+
+```bash
+docker build -t halterodata-front .
+docker run -p 3000:3000 halterodata-front
+```
+
+Set `NUXT_PUBLIC_API_BASE_URL` to point at another API instance (see
+`.env.example`).
+
+## Quality checks
+
+| Command                | Purpose                                     |
+| ---------------------- | ------------------------------------------- |
+| `npm run lint`         | ESLint (Nuxt config + project rules)        |
+| `npm run format:check` | Prettier, including Tailwind class ordering |
+| `npm run typecheck`    | `vue-tsc` in strict mode                    |
+| `npm test`             | Vitest (Nuxt environment)                   |
+| `npm run docs:check`   | Instruction files still in sync             |
+
+CI runs all of the above plus the build on every pull request.
+
+## Contributing
+
+Architecture rules, project structure and known API constraints live in
+`CLAUDE.md` / `CURSOR.md` / `.github/copilot-instructions.md`. All three are
+**generated** from `docs/instructions.template.md` — edit that file and run
+`npm run docs:sync`; CI fails if they drift.
 
 ## Can I use it for my own?
 
