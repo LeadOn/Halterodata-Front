@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1
 
-# --- Étape de build -----------------------------------------------------
-FROM node:24-alpine AS build
+FROM node:alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
@@ -10,8 +9,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# --- Image d'exécution --------------------------------------------------
-FROM node:24-alpine AS runtime
+FROM node:alpine AS runtime
 WORKDIR /app
 
 ENV NODE_ENV=production
